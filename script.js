@@ -23,40 +23,39 @@ function addBookToLibrary(title, author, pages, read) {
     console.log(`Added a new book: ${newBook.title}`);
 }
 
-// function displayBooks() {
-//     const booksContainer = document.getElementById('books-container');
+function displayBooks() {
+    const booksContainer = document.getElementById('books-container');
 
-//     if (!booksContainer) {
-//         console.error('The element with ID "books-container" was not found.')
-//     }
-//     booksContainer.innerHTML = '';
+    if (!booksContainer) {
+        console.error('The element with ID "books-container" was not found.')
+    }
+    booksContainer.innerHTML = '';
     
-//     myLibrary.forEach(book => {
-//         const bookCard = document.createElement('div');
-//         bookCard.classList.add('book-card');
+    myLibrary.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
 
-//         const title = document.createElement('h3');
-//         title.textContent = book.title;
-//         bookCard.appendChild(title);
+        const title = document.createElement('h3');
+        title.textContent = book.title;
+        bookCard.appendChild(title);
 
-//         const author = document.createElement('p');
-//         author.textContent = `Author: ${book.author}`;
-//         bookCard.appendChild(author);
+        const author = document.createElement('p');
+        author.textContent = `Author: ${book.author}`;
+        bookCard.appendChild(author);
 
-//         const pages = document.createElement('p');
-//         pages.textContent = `Pages: ${book.pages}`;
-//         bookCard.appendChild(pages);
+        const pages = document.createElement('p');
+        pages.textContent = `Pages: ${book.pages}`;
+        bookCard.appendChild(pages);
 
-//         const readStatus = document.createElement('p');
-//         readStatus.classList.add('read-status');
-//         readStatus.textContent = book.read ? 'Status: Read' : 'Status: Not Read Yet';
-//         bookCard.appendChild(readStatus);
+        const readStatus = document.createElement('p');
+        readStatus.classList.add('read-status');
+        readStatus.textContent = book.read ? 'Status: Read' : 'Status: Not Read Yet';
+        bookCard.appendChild(readStatus);
 
-//         booksContainer.appendChild(bookCard);
-//     })
+        booksContainer.appendChild(bookCard);
+    })
 
-
-// }
+}
 
 addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, true);
 addBookToLibrary('The Lord of the rings', 'J.R.R Tolkien', 1178, false);
