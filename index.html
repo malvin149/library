@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" async></script>
     <title>My Book Library</title>
 </head>
 <body>
@@ -16,11 +15,7 @@
 
     <dialog id="new-book-dialog">
         <h2>Add a New Book</h2>
-        <form action="" id="boo-form" method="dialog">
-            <div class="form-row">
-                <label for="title">Title:</label>
-                <input type="text" id="title" required>
-            </div>
+        <form id="book-form" method="dialog">
             <div class="form-row">
                 <label for="title">Title:</label>
                 <input type="text" id="title" required>
@@ -34,7 +29,7 @@
                 <input type="text" id="pages" required>
             </div>
             <div class="form-row">
-                <input type="checkbox" id="read" required>
+                <input type="checkbox" id="read">
                 <label for="read">I have read this book</label>
             </div>
             <div class="form-buttons">
@@ -43,5 +38,7 @@
             </div>
         </form>
     </dialog>
+
+    <script src="script.js"></script>
 </body>
 </html>
