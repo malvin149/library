@@ -16,6 +16,7 @@ function Book (title, author, pages, read) {
     }
 }
 
+
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
 
@@ -23,12 +24,15 @@ function addBookToLibrary(title, author, pages, read) {
     console.log(`Added a new book: ${newBook.title}`);
 }
 
+
 function displayBooks() {
     const booksContainer = document.getElementById('books-container');
 
     if (!booksContainer) {
         console.error('The element with ID "books-container" was not found.')
     }
+
+    // Container & Card Content
     booksContainer.innerHTML = '';
     
     myLibrary.forEach(book => {
@@ -57,8 +61,57 @@ function displayBooks() {
 
 }
 
-addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, true);
-addBookToLibrary('The Lord of the rings', 'J.R.R Tolkien', 1178, false);
-addBookToLibrary('The The Great Gatsby', 'F. Scott Fitzgerald', 180, true);
 
-displayBooks();
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Manual addition of some books
+    addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, true);
+    addBookToLibrary('The Lord of the rings', 'J.R.R Tolkien', 1178, false);
+    addBookToLibrary('The The Great Gatsby', 'F. Scott Fitzgerald', 180, true);
+    
+    // Initial books displayed on page load
+    displayBooks();
+    
+    // FORM & DIALOG LOGIC
+    const  newBookBtn = document.getElementById('new-book-btn');
+    const newBookDialog = document.getElementById('new-book-dialog');
+    const bookForm = document.getElementById('book-form');
+    const closeBtn = document.getElementById('close-btn');
+    
+    console.log('Book Form ELement:', bookForm);
+    
+    
+    // Show the dialog when 'Add New Book' btn is clicked
+    newBookBtn.addEventListener('click', () => {
+        newBookDialog.showModal();
+    });
+    
+    // Close the dialog when the close btn is clicked
+    closeBtn.addEventListener('click', () => {
+        newBookDialog.close();
+    })
+    
+    
+    // Form Submission
+    bookForm.addEventListener('submit', (event) => {
+        // prevent the default form submission behavior
+        event.preventDefault();
+    
+        // get values from the form inputs
+        const title = document.getElementById('title').value;
+        const author = document.getElementById('author').value;
+        const pages = document.getElementById('pages').value;
+        const read = document.getElementById('read').checked;
+    
+        // Add the new book to the library
+        addBookToLibrary(title, author, pages, read);
+    
+        // Update the display to show the new book
+        displayBooks();
+    
+        // Reset the form fields and close the dialog
+        bookForm.reset();
+        newBookDialog.close();
+    
+    });
+})
