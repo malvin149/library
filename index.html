@@ -9,10 +9,39 @@
 </head>
 <body>
     <h1>My Books Library</h1>
-
+    <button id="new-book-btn">Add New Book</button>
     <div id="books-container">
         <!-- Books card will be inserted by JavaScript -->
     </div>
 
+    <dialog id="new-book-dialog">
+        <h2>Add a New Book</h2>
+        <form action="" id="boo-form" method="dialog">
+            <div class="form-row">
+                <label for="title">Title:</label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-row">
+                <label for="title">Title:</label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-row">
+                <label for="author">Author:</label>
+                <input type="text" id="author" required>
+            </div>
+            <div class="form-row">
+                <label for="pages">Number of Pages:</label>
+                <input type="text" id="pages" required>
+            </div>
+            <div class="form-row">
+                <input type="checkbox" id="read" required>
+                <label for="read">I have read this book</label>
+            </div>
+            <div class="form-buttons">
+                <button type="submit">Add book</button>
+                <button type="button" id="close-btn">Close</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>
