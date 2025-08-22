@@ -60,6 +60,21 @@ h1 {
     color: #008000;
 }
 
+.remove-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.remove-btn:hover {
+    background-color: #c82333;
+}
+
 /* Dialog Form styles */
 dialog {
     border: none;

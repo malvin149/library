@@ -56,13 +56,38 @@ function displayBooks() {
         readStatus.textContent = book.read ? 'Status: Read' : 'Status: Not Read Yet';
         bookCard.appendChild(readStatus);
 
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.classList.add('remove-btn');
+        removeBtn.setAttribute('data-id', book.id);
+        bookCard.appendChild(removeBtn);
+
         booksContainer.appendChild(bookCard);
     })
 
 }
 
+function removeBookFromLibrary(bookId) {
+    const bookIndex = myLibrary.findIndex(book => book.id === bookId);
+
+    if (bookIndex > -1) {
+        myLibrary.splice(bookIndex, 1);
+    }
+
+    displayBooks();
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    const booksContainer = document.getElementById('books-container');
+
+    booksContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-btn')) {
+            const bookId = event.target.getAttribute('data-id');
+            removeBookFromLibrary(bookId);
+        }
+    })
 
     // Manual addition of some books
     addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, true);
