@@ -75,6 +75,21 @@ h1 {
     background-color: #c82333;
 }
 
+.toggle-read-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.toggle-read-btn:hover {
+    background-color: #218838;
+}
+
 /* Dialog Form styles */
 dialog {
     border: none;
