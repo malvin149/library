@@ -16,6 +16,9 @@ function Book (title, author, pages, read) {
     }
 }
 
+Book.prototype.toggleReadStatus = function () {
+    this.read = !this.read;
+};
 
 function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
@@ -62,6 +65,12 @@ function displayBooks() {
         removeBtn.setAttribute('data-id', book.id);
         bookCard.appendChild(removeBtn);
 
+        const readStatusBtn = document.createElement('button');
+        readStatusBtn.textContent = 'Toggle Read Status';
+        readStatusBtn.classList.add('toggle-read-btn');
+        readStatusBtn.setAttribute('data-id', book.id);
+        bookCard.appendChild(readStatusBtn);
+
         booksContainer.appendChild(bookCard);
     })
 
@@ -88,6 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
             removeBookFromLibrary(bookId);
         }
     })
+
+    booksContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('toggle-read-btn')) {
+            const bookId = event.target.getAttribute('data-id');
+
+            const bookToToggle = myLibrary.find(book => book.id === bookId);
+
+            if (bookToToggle) {
+                bookToToggle.toggleReadStatus();
+                displayBooks();
+            }
+        }
+    });
 
     // Manual addition of some books
     addBookToLibrary('The Hobbit', 'J.R.R Tolkien', 295, true);
