@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const booksContainer = document.getElementById('books-container');
 
+    // Remove Event
     booksContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('remove-btn')) {
             const bookId = event.target.getAttribute('data-id');
@@ -98,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    // Toggle read Event
     booksContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('toggle-read-btn')) {
             const bookId = event.target.getAttribute('data-id');
