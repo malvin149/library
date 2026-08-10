@@ -19,3 +19,11 @@ h1 {
 	margin-bottom: 1.5rem;
 	color: #37352f;
 }
+
+.library {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
