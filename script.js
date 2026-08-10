@@ -66,8 +66,8 @@ function displayBooks() {
 		removeBtn.textContent = `Delete`
 
 		const fields = [
-			{ label: "Author:", value: book.author },
-			{ label: "Pages:", value: book.pages },
+			{ label: "Author", value: book.author },
+			{ label: "Pages", value: book.pages },
 		]
 
 		fields.forEach((field) => {
@@ -116,7 +116,7 @@ function displayBooks() {
 }
 
 // One listener on the container instead of one per button - cards
-// get rebuilt on every render, so per-button listeners would need 
+// get rebuilt on every render, so per-button listeners would need
 // to be reattached every time, Delegation avoids that entirely.
 container.addEventListener("click", (e) => {
 	if (e.target.matches(".toggle-btn")) {
@@ -125,4 +125,37 @@ container.addEventListener("click", (e) => {
 	if (e.target.matches(".remove-btn")) {
 		removeBook(e.target.dataset.id)
 	}
+})
+
+const showFormBtn = document.querySelector("#show-form-btn")
+const dialog = document.querySelector("#dialog-content")
+const closeFormBtn = document.querySelector("#close-form-btn")
+const form = document.querySelector("#add-book-form")
+const titleInput = document.querySelector("#title")
+const authorInput = document.querySelector("#author")
+const pagesInput = document.querySelector("#pages")
+const readCheckbox = document.querySelector("#read")
+
+showFormBtn.addEventListener("click", () => {
+	dialog.showModal()
+})
+
+closeFormBtn.addEventListener("click", () => {
+	dialog.close()
+})
+
+form.addEventListener("submit", () => {
+	addBookToLibrary(
+		titleInput.value,
+		authorInput.value,
+		Number(pagesInput.value),
+		readCheckbox.checked,
+	)
+
+	titleInput.value = ""
+	authorInput.value = ""
+	pagesInput.value = ""
+	readCheckbox.checked = false
+
+	displayBooks()
 })
