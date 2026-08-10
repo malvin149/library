@@ -13,7 +13,7 @@ function Book(title, author, pages, read) {
 }
 
 // Shared behavior lives on the prototype, not the constructor,
-// so every Book instance uses one shared function instead of 
+// so every Book instance uses one shared function instead of
 // each instance getting its own duplicate copy in memory.
 Book.prototype.info = function () {
 	return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`
@@ -28,7 +28,19 @@ function addBookToLibrary(title, author, pages, read) {
 	myLibrary.push(book)
 }
 
-// displayBooks is the single source of DOM truth: It clears the 
+function toggleReadStatus(bookId) {
+	const foundBook = myLibrary.find((book) => book.id === bookId)
+	foundBook.toggleRead()
+	displayBooks()
+}
+
+function removeBook(bookId) {
+	const index = myLibrary.findIndex((book) => book.id === bookId)
+	myLibrary.splice(index, 1)
+	displayBooks()
+}
+
+// displayBooks is the single source of DOM truth: It clears the
 // container and rebuilds every card from myLibrary on each call,
 // so the display never drifts out of sync with the underlying data.
 const container = document.querySelector(".library")
@@ -71,6 +83,9 @@ function displayBooks() {
 			infoContainer.appendChild(rowDiv)
 		})
 
+        // Status gets its own dot + colored class, built separately from
+        // the generic field loop, since it needs conditional styling 
+        // the other rows don't.
 		const statusRow = document.createElement("div")
 		const statusLabel = document.createElement("span")
 		const statusValueWrapper = document.createElement("span")
