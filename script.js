@@ -19,3 +19,9 @@ Book.prototype.info = function () {
 Book.prototype.toggleRead = function () {
 	this.read = !this.read
 }
+
+function addBookToLibrary(title, author, pages, read) {
+	const book = new Book(title, author, pages, read)
+	myLibrary.push(book)
+}
+
