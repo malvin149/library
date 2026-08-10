@@ -58,8 +58,8 @@ function displayBooks() {
 		toggleBtn.dataset.id = book.id
 		removeBtn.dataset.id = book.id
 
-		toggleBtn.classList.add("toggle-btn")
-		removeBtn.classList.add("remove-btn")
+		toggleBtn.classList.add("btn", "toggle-btn")
+		removeBtn.classList.add("btn", "remove-btn")
 
 		title.textContent = `${book.title}`
 		toggleBtn.textContent = `${book.read ? "Mark as Unread" : "Mark as Read"}`
