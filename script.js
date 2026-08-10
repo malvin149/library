@@ -144,6 +144,12 @@ closeFormBtn.addEventListener("click", () => {
 	dialog.close()
 })
 
+dialog.addEventListener("click", (e) => {
+	if (e.target === dialog) {
+		dialog.close()
+	}
+})
+
 form.addEventListener("submit", () => {
 	addBookToLibrary(
 		titleInput.value,
