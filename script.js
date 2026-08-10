@@ -62,7 +62,7 @@ function displayBooks() {
 		removeBtn.classList.add("remove-btn")
 
 		title.textContent = `${book.title}`
-		toggleBtn.textContent = `${book.read ? "Not read yet" : "Read"}`
+		toggleBtn.textContent = `${book.read ? "Mark as Unread" : "Mark as Read"}`
 		removeBtn.textContent = `Delete`
 
 		const fields = [
@@ -78,6 +78,8 @@ function displayBooks() {
 			labelSpan.textContent = `${field.label}:`
 			valueSpan.textContent = `${field.value}`
 
+			rowDiv.classList.add("info-row")
+
 			rowDiv.appendChild(labelSpan)
 			rowDiv.appendChild(valueSpan)
 			infoContainer.appendChild(rowDiv)
@@ -92,6 +94,7 @@ function displayBooks() {
 		const statusDot = document.createElement("span")
 		const statusText = document.createElement("span")
 
+		statusRow.classList.add("info-row")
 		statusValueWrapper.classList.add("status-wrapper")
 		statusDot.classList.add(
 			"status-dot",
@@ -165,3 +168,9 @@ form.addEventListener("submit", () => {
 
 	displayBooks()
 })
+
+addBookToLibrary("The Hobbit", "J.R.R Tolkien", 295, true)
+addBookToLibrary("Sapiens", "Yuval Noah Harari", 443, false)
+addBookToLibrary("Atomic Habits", "James Clear", 320, false)
+
+displayBooks()
