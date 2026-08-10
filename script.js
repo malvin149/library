@@ -83,9 +83,9 @@ function displayBooks() {
 			infoContainer.appendChild(rowDiv)
 		})
 
-        // Status gets its own dot + colored class, built separately from
-        // the generic field loop, since it needs conditional styling 
-        // the other rows don't.
+		// Status gets its own dot + colored class, built separately from
+		// the generic field loop, since it needs conditional styling
+		// the other rows don't.
 		const statusRow = document.createElement("div")
 		const statusLabel = document.createElement("span")
 		const statusValueWrapper = document.createElement("span")
@@ -114,3 +114,15 @@ function displayBooks() {
 		container.appendChild(card)
 	})
 }
+
+// One listener on the container instead of one per button - cards
+// get rebuilt on every render, so per-button listeners would need 
+// to be reattached every time, Delegation avoids that entirely.
+container.addEventListener("click", (e) => {
+	if (e.target.matches(".toggle-btn")) {
+		toggleReadStatus(e.target.dataset.id)
+	}
+	if (e.target.matches(".remove-btn")) {
+		removeBook(e.target.dataset.id)
+	}
+})
