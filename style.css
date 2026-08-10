@@ -14,10 +14,11 @@ body {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 3rem;
 	font-weight: 700;
 	margin-bottom: 1.5rem;
 	color: #37352f;
+	text-align: center;
 }
 
 .library {
@@ -93,17 +94,41 @@ h1 {
 }
 
 dialog {
+	position: relative;
 	background: #fffdf9;
 	border: none;
 	border-radius: 12px;
 	padding: 3rem;
-	width: 30%;
+	width: 100%;
+    max-width: 360px;
 	box-shadow: 0 8px 24px rgba(55, 53, 47, 0.15);
+    overflow: visible;
 }
 
 dialog::backdrop {
 	background: rgba(55, 53, 47, 0.4);
 	backdrop-filter: blur(3px);
+}
+
+#close-form-btn {
+    position: absolute;
+    z-index: 1;
+    top: -0.75rem;
+    right: -0.75rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fffdf9;
+    background: #f4f0e8;
+    color: #37352f;
+    font-size: 1.3rem;
+    line-height: 1;
+    padding: 0;
+    box-shadow: 0 2px 6px rgba(55, 53, 47, 0.15);
+}
+
+#close-form-bht:hover {
+    background: #ebe6dd;
 }
 
 #add-book-form {
@@ -121,15 +146,45 @@ dialog::backdrop {
 
 .form-row input[type="text"],
 .form-row input[type="number"] {
-    width: 100%;
-    padding: 0.6rem 0.8rem;
-    border: 1px solid #e0dace;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 0.6rem 0.8rem;
+	border: 1px solid #e0dace;
+	border-radius: 8px;
+	font-size: 1rem;
+	box-sizing: border-box;
 }
 
 .form-row input:focus {
-    outline: none;
-    border-color: #af8c6b;
+	outline: none;
+	border-color: #af8c6b;
+}
+
+.form-row input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #af8c6b;
+    margin-right: 0.4rem;
+}
+
+#show-form-btn {
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	font-size: 2.5rem;
+	border: none;
+	background: #af8c6b;
+	color: #fffdf9;
+	cursor: pointer;
+	box-shadow: 0 4px 12px rgba(55, 53, 47, 0.2);
+	transition:
+		transform 0.15s ease,
+		background 0.15s ease;
+}
+
+#show-form-btn:hover {
+	background: #96795a;
+	transform: scale(1.08);
 }
