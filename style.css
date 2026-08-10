@@ -39,3 +39,30 @@ h1 {
     box-shadow: 0 1px 3px rgba(55, 53, 47, 0.08);
 }
 
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    color: #6b6a67;
+    font-size: 1.3rem;
+}
+
+.status-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-read {
+    background-color: #7a9471;
+}
+
+.status-unread {
+    background-color: #a39c8f;
+}
