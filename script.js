@@ -1,5 +1,3 @@
-const myLibrary = []
-
 function createBook(title, author, pages, read) {
 	const id = crypto.randomUUID()
 
