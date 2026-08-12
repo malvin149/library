@@ -1,26 +1,22 @@
 const myLibrary = []
 
-function Book(title, author, pages, read) {
-	if (!new.target) {
-		throw new Error("You must use the 'new' operator to call the constructor")
+function createBook(title, author, pages, read) {
+	const id = crypto.randomUUID()
+
+	return {
+		id,
+		title,
+		author,
+		pages,
+		read,
+
+		info: function() {
+			return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
+		},
+		toggleRead: function () {
+			read = !read;
+		}
 	}
-
-	this.id = crypto.randomUUID()
-	this.title = title
-	this.author = author
-	this.pages = pages
-	this.read = read
-}
-
-// Shared behavior lives on the prototype, not the constructor,
-// so every Book instance uses one shared function instead of
-// each instance getting its own duplicate copy in memory.
-Book.prototype.info = function () {
-	return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`
-}
-
-Book.prototype.toggleRead = function () {
-	this.read = !this.read
 }
 
 function addBookToLibrary(title, author, pages, read) {
