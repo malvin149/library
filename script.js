@@ -1,20 +1,21 @@
 function createBook(title, author, pages, read) {
 	const id = crypto.randomUUID()
 
-	return {
+	const book = {
 		id,
 		title,
 		author,
 		pages,
 		read,
-
 		info: function () {
 			return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
 		},
 		toggleRead: function () {
-			read = !read
+			book.read = !book.read
 		},
 	}
+
+	return book
 }
 
 const Library = (function () {
