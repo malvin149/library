@@ -1,3 +1,13 @@
+const container = document.querySelector(".library")
+const showFormBtn = document.querySelector("#show-form-btn")
+const dialog = document.querySelector("#dialog-content")
+const closeFormBtn = document.querySelector("#close-form-btn")
+const form = document.querySelector("#add-book-form")
+const titleInput = document.querySelector("#title")
+const authorInput = document.querySelector("#author")
+const pagesInput = document.querySelector("#pages")
+const readCheckbox = document.querySelector("#read")
+
 function createBook(title, author, pages, read) {
 	const id = crypto.randomUUID()
 
@@ -44,7 +54,6 @@ const Library = (function () {
 // displayBooks is the single source of DOM truth: It clears the
 // container and rebuilds every card from myLibrary on each call,
 // so the display never drifts out of sync with the underlying data.
-const container = document.querySelector(".library")
 function displayBooks() {
 	container.replaceChildren()
 
@@ -132,15 +141,6 @@ container.addEventListener("click", (e) => {
 		displayBooks()
 	}
 })
-
-const showFormBtn = document.querySelector("#show-form-btn")
-const dialog = document.querySelector("#dialog-content")
-const closeFormBtn = document.querySelector("#close-form-btn")
-const form = document.querySelector("#add-book-form")
-const titleInput = document.querySelector("#title")
-const authorInput = document.querySelector("#author")
-const pagesInput = document.querySelector("#pages")
-const readCheckbox = document.querySelector("#read")
 
 showFormBtn.addEventListener("click", () => {
 	dialog.showModal()
