@@ -1,53 +1,63 @@
-const myLibrary = []
+const container = document.querySelector(".library")
+const showFormBtn = document.querySelector("#show-form-btn")
+const dialog = document.querySelector("#dialog-content")
+const closeFormBtn = document.querySelector("#close-form-btn")
+const form = document.querySelector("#add-book-form")
+const titleInput = document.querySelector("#title")
+const authorInput = document.querySelector("#author")
+const pagesInput = document.querySelector("#pages")
+const readCheckbox = document.querySelector("#read")
 
-function Book(title, author, pages, read) {
-	if (!new.target) {
-		throw new Error("You must use the 'new' operator to call the constructor")
+function createBook(title, author, pages, read) {
+	const id = crypto.randomUUID()
+
+	const book = {
+		id,
+		title,
+		author,
+		pages,
+		read,
+		info: function () {
+			return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
+		},
+		toggleRead: function () {
+			book.read = !book.read
+		},
 	}
 
-	this.id = crypto.randomUUID()
-	this.title = title
-	this.author = author
-	this.pages = pages
-	this.read = read
+	return book
 }
 
-// Shared behavior lives on the prototype, not the constructor,
-// so every Book instance uses one shared function instead of
-// each instance getting its own duplicate copy in memory.
-Book.prototype.info = function () {
-	return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read ? "read" : "not read yet"}`
-}
+const Library = (function () {
+	const myLibrary = []
 
-Book.prototype.toggleRead = function () {
-	this.read = !this.read
-}
+	function addBook(title, author, pages, read) {
+		const book = createBook(title, author, pages, read)
+		myLibrary.push(book)
+	}
+	function removeBook(id) {
+		const idx = myLibrary.findIndex((book) => book.id === id)
+		if (idx === -1) return "Book not found"
+		myLibrary.splice(idx, 1)
+	}
+	function toggleRead(id) {
+		const foundBook = myLibrary.find((book) => book.id === id)
+		foundBook.toggleRead()
+	}
+	function getAllBooks() {
+		return myLibrary
+	}
 
-function addBookToLibrary(title, author, pages, read) {
-	const book = new Book(title, author, pages, read)
-	myLibrary.push(book)
-}
-
-function toggleReadStatus(bookId) {
-	const foundBook = myLibrary.find((book) => book.id === bookId)
-	foundBook.toggleRead()
-	displayBooks()
-}
-
-function removeBook(bookId) {
-	const index = myLibrary.findIndex((book) => book.id === bookId)
-	myLibrary.splice(index, 1)
-	displayBooks()
-}
+	return { addBook, removeBook, getAllBooks, toggleRead }
+})()
 
 // displayBooks is the single source of DOM truth: It clears the
 // container and rebuilds every card from myLibrary on each call,
 // so the display never drifts out of sync with the underlying data.
-const container = document.querySelector(".library")
 function displayBooks() {
 	container.replaceChildren()
 
-	myLibrary.forEach((book) => {
+	Library.getAllBooks().forEach((book) => {
 		const card = document.createElement("div")
 		const title = document.createElement("h2")
 		const toggleBtn = document.createElement("button")
@@ -123,21 +133,14 @@ function displayBooks() {
 // to be reattached every time, Delegation avoids that entirely.
 container.addEventListener("click", (e) => {
 	if (e.target.matches(".toggle-btn")) {
-		toggleReadStatus(e.target.dataset.id)
+		Library.toggleRead(e.target.dataset.id)
+		displayBooks()
 	}
 	if (e.target.matches(".remove-btn")) {
-		removeBook(e.target.dataset.id)
+		Library.removeBook(e.target.dataset.id)
+		displayBooks()
 	}
 })
-
-const showFormBtn = document.querySelector("#show-form-btn")
-const dialog = document.querySelector("#dialog-content")
-const closeFormBtn = document.querySelector("#close-form-btn")
-const form = document.querySelector("#add-book-form")
-const titleInput = document.querySelector("#title")
-const authorInput = document.querySelector("#author")
-const pagesInput = document.querySelector("#pages")
-const readCheckbox = document.querySelector("#read")
 
 showFormBtn.addEventListener("click", () => {
 	dialog.showModal()
@@ -154,7 +157,7 @@ dialog.addEventListener("click", (e) => {
 })
 
 form.addEventListener("submit", () => {
-	addBookToLibrary(
+	Library.addBook(
 		titleInput.value,
 		authorInput.value,
 		Number(pagesInput.value),
@@ -169,8 +172,8 @@ form.addEventListener("submit", () => {
 	displayBooks()
 })
 
-addBookToLibrary("The Hobbit", "J.R.R Tolkien", 295, true)
-addBookToLibrary("Sapiens", "Yuval Noah Harari", 443, false)
-addBookToLibrary("Atomic Habits", "James Clear", 320, false)
+Library.addBook("The Hobbit", "J.R.R Tolkien", 295, true)
+Library.addBook("Sapiens", "Yuval Noah Harari", 443, false)
+Library.addBook("Atomic Habits", "James Clear", 320, false)
 
 displayBooks()
