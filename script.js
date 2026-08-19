@@ -24,31 +24,11 @@ class Book {
 	}
 }
 
-function createBook(title, author, pages, read) {
-	const id = crypto.randomUUID()
-
-	const book = {
-		id,
-		title,
-		author,
-		pages,
-		read,
-		info: function () {
-			return `${title} by ${author}, ${pages} pages, ${read ? "read" : "not read yet"}`
-		},
-		toggleRead: function () {
-			book.read = !book.read
-		},
-	}
-
-	return book
-}
-
 const Library = (function () {
 	const myLibrary = []
 
 	function addBook(title, author, pages, read) {
-		const book = createBook(title, author, pages, read)
+		const book = new Book(title, author, pages, read)
 		myLibrary.push(book)
 	}
 	function removeBook(id) {
